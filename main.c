@@ -15,26 +15,22 @@ int main(void) {
         for (j = 0; j < size; j++){
             Map[i][j] = '1';}}
 
-    printf("please enter the number of castles");
+    printf("please enter the number of castles and coordinates");
     scanf("%d",&Ccount); //قرار گیری قلمرو ها
     for(k=1;k<=Ccount;k++){
-        printf("enter the coordinates of castle %d",k);
         scanf("%d %d",&i, &j);
         Map[i-1][j-1]='C';}
 
-    printf("please enter the number of villages");
+    printf("please enter the number of villages, coordinates,gold rate and food rate");
     scanf("%d",&Vcount); //قرار گیری روستا ها و نرخ تولید
     for(k=1;k<=Vcount; k++){
-        printf("enter the coordinates of village %d",k);
         scanf("%d %d",&i, &j);
         Map[i-1][j-1]='V';
-        printf("enter the gold rate and food rate of village %d",k);
         scanf("%d %d",&goldRate[i-1][j-1], &foodRate[i-1][j-1]);}
 
-    printf("please enter the number of blocked houses");
+    printf("please enter the number of blocked houses and coordinates");
     scanf("%d",&Xcount);//قرار گیری خانه های مسدود
     for(k=1;k<=Xcount;k++){
-        printf("enter the coordinates of house %d",k);
         scanf("%d %d",&i, &j);
         Map[i-1][j-1]='X';}
 
