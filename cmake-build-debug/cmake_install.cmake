@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/mahsa/OneDrive/Desktop/test
+# Install script for directory: C:/Users/mahsa/CLionProjects/1st_phase
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/mahsa/OneDrive/Desktop/test/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/mahsa/CLionProjects/1st_phase/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
