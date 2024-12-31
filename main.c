@@ -72,6 +72,8 @@ int main(void) {
         }
     }
     printMap(size,Map);
+    rulers.workers=1;
+    rulers.goldrate=5;
         while (1) {
         int choise;
         printf("0.Exit.\n");
@@ -108,7 +110,7 @@ int main(void) {
                 printf("Numbers of workers:\n");
                 int workers;
                 scanf("%d", &workers);
-                rulers.workers=workers;
+                rulers.workers+=workers;
                 break;
             }
             default:
