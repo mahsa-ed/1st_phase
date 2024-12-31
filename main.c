@@ -11,6 +11,15 @@ struct coordinates { //*
     int y;
 }; //*
 
+typedef struct {
+    int soldiers;
+    int goldrate;
+    int foodrate;
+    int workers;
+    int gold;
+    int food;
+}Ruler;
+
 int main(void) {
     srand (time (NULL) ) ;
     int size;
@@ -63,4 +72,46 @@ int main(void) {
         }
     }
     printMap(size,Map);
+        while (1) {
+        int choise;
+        printf("0.Exit.\n");
+        printf("1.Producing food:\n");
+        printf("2.Producing gold:\n");
+        printf("3.Hiring soldiers:\n");
+        printf("4.Hiring workers:\n");
+        switch (choise) {
+            case 0:
+                exit(0);
+            case 1: {
+                printf("Amount of producing food:\n");
+                int food;
+                scanf("%d", &food);
+                rulers.food=food;
+                break;
+            }
+            case 2: {
+                printf("Amount of producing gold:\n");
+                int gold;
+                scanf("%d", &gold);
+                rulers.gold=gold;
+                break;
+            }
+            case 3: {
+                printf("Numbers of soldiers:\n");
+                int soldiers;
+                scanf("%d", &soldiers);
+                rulers.soldiers=soldiers;
+                break;
+            }
+            case 4: {
+                printf("Numbers of workers:\n");
+                int workers;
+                scanf("%d", &workers);
+                rulers.workers=workers;
+                break;
+            }
+            default:
+                printf("Wrong choice!\n");
+        }
+    }
 }
