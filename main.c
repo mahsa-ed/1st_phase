@@ -76,11 +76,12 @@ int main(void) {
     rulers.goldrate=5;
         while (1) {
         int choise;
-        printf("0.Exit.\n");
-        printf("1.Producing food:\n");
-        printf("2.Producing gold:\n");
-        printf("3.Hiring soldiers:\n");
-        printf("4.Hiring workers:\n");
+        printf("MENU:\n");
+        printf("0.Exit\n");
+        printf("1.Producing food\n");
+        printf("2.Producing gold\n");
+        printf("3.Hiring soldiers\n");
+        printf("4.Hiring workers\n");
         scanf("%d",&choise);
         switch (choise) {
             case 0:
