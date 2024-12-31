@@ -79,6 +79,7 @@ int main(void) {
         printf("2.Producing gold:\n");
         printf("3.Hiring soldiers:\n");
         printf("4.Hiring workers:\n");
+        scanf("%d",&choise);
         switch (choise) {
             case 0:
                 exit(0);
