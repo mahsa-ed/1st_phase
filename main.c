@@ -3,13 +3,12 @@
 #include <time.h>
 #include "raylib.h"
 #include "file.h"
+#include "my_struct.h" //*
 #define MAXSIZE 17
 
 char Map[MAXSIZE][MAXSIZE];
-struct coordinates { //*
-    int x;
-    int y;
-}; //*
+
+
 
 typedef struct {
     int soldiers;
@@ -25,8 +24,9 @@ int main(void) {
     int size;
     int Vcount, Xcount, Ccount;
     int i, j, k;
-    struct coordinates castle[10];
-    struct coordinates village[15];
+    coordinates castle[Ccount];
+    coordinates village[Vcount];
+    Ruler rulers;
 
 
     printf("please enter the map size ");
@@ -72,50 +72,61 @@ int main(void) {
         }
     }
     printMap(size,Map);
+
     rulers.workers=1;
-    rulers.goldrate=5;
-        while (1) {
-        int choise;
-        printf("MENU:\n");
-        printf("0.Exit\n");
-        printf("1.Producing food\n");
-        printf("2.Producing gold\n");
-        printf("3.Hiring soldiers\n");
-        printf("4.Hiring workers\n");
-        scanf("%d",&choise);
-        switch (choise) {
-            case 0:
-                exit(0);
-            case 1: {
-                printf("Amount of producing food:\n");
-                int food;
-                scanf("%d", &food);
-                rulers.food=food;
-                break;
-            }
-            case 2: {
-                printf("Amount of producing gold:\n");
-                int gold;
-                scanf("%d", &gold);
-                rulers.gold=gold;
-                break;
-            }
-            case 3: {
-                printf("Numbers of soldiers:\n");
-                int soldiers;
-                scanf("%d", &soldiers);
-                rulers.soldiers=soldiers;
-                break;
-            }
-            case 4: {
-                printf("Numbers of workers:\n");
-                int workers;
-                scanf("%d", &workers);
-                rulers.workers+=workers;
-                break;
-            }
-            default:
-                printf("Wrong choice!\n");
+    rulers.gold=5;
+    rulers.goldrate=1;
+    int choise;
+   while(choise != 0) {
+       printf("MENU:\n");
+       printf("0.Exit\n");
+       printf("1.Producing food\n");
+       printf("2.Producing gold\n");
+       printf("3.Hiring soldiers\n");
+       printf("4.Hiring workers\n");
+       scanf("%d",&choise);
+       switch (choise) {
+           case 0:
+               exit(0);
+           case 1: {
+               printf("Amount of producing food:\n");
+               int food;
+               scanf("%d", &food);
+               rulers.food=food;
+               break;
+           }
+           case 2: {
+               printf("Amount of producing gold:\n");
+               int gold;
+               scanf("%d", &gold);
+               rulers.gold=gold;
+               break;
+           }
+           case 3: {
+               printf("Numbers of soldiers:\n");
+               int soldiers;
+               scanf("%d", &soldiers);
+               rulers.soldiers=soldiers;
+               break;
+           }
+           case 4: {
+               printf("Numbers of workers:\n");
+               int workers;
+               scanf("%d", &workers);
+               rulers.workers+=workers;
+               break;
+           }
+           default:
+               printf("Wrong choice!\n");
+       }
+   }
+    for(k=0;k<Ccount;k++) {
+        for(j=0;j<Vcount;j++) {
+            int length;
+            printf("the length of route from castle %d to village %d is %d",k+1,j+1,length);
         }
     }
+
+
+
 }
