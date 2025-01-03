@@ -9,10 +9,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "my_struct.h"
 
 
 
-void printMap(int size,char map[][17]){
+void printMap(int size,char map[][MAXSIZE]){
     int i,j;
     for (i = 0; i < size; i++){
         for (j = 0; j < size; j++){
@@ -38,3 +39,4 @@ int generate_number () {
     }
     return -1;
 }
+
