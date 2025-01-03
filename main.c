@@ -82,6 +82,7 @@ int main(void) {
     rulers.workers=1;
     rulers.gold=5;
     rulers.goldrate=1;
+    rulers.foodrate=0;
     int choise;
     printf("How many soldiers do you want?\n");
     int target_soldiers;
@@ -101,9 +102,12 @@ int main(void) {
                 exit(0);
             case 1: {
                 printf("Amount of producing foodrate(1 GOLD IS NEEDED):\n");
-                int foodrate;
-                scanf("%d", &foodrate);
-                if(rulers.gold >= 1)rulers.foodrate=foodrate;
+                int number;
+                scanf("%d", &number);
+                if(rulers.gold >=number*1){
+                    rulers.foodrate+= number;
+                    rulwrs.gold-=(number*1);
+                }
                 else printf("YOU DON'T HAVE ENOUGH GOLDS TO BUY FOODS!\n");
                 break;
             }
