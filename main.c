@@ -104,7 +104,7 @@ int main(void) {
         printf("1.Producing foodrate\n");
         printf("2.Hiring soldiers\n");
         printf("3.Hiring workers\n");
-        printf("4.Road construction\n");
+        printf("4.Build a road\n");
         scanf("%d",&choise);
         switch (choise) {
             case 0:
