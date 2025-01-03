@@ -93,9 +93,8 @@ int main(void) {
         printf("MENU:\n");
         printf("0.Exit\n");
         printf("1.Producing foodrate\n");
-        printf("2.Producing goldrate\n");
-        printf("3.Hiring soldiers\n");
-        printf("4.Hiring workers\n");
+        printf("2.Hiring soldiers\n");
+        printf("3.Hiring workers\n");
         scanf("%d",&choise);
         switch (choise) {
             case 0:
@@ -111,14 +110,14 @@ int main(void) {
                 else printf("YOU DON'T HAVE ENOUGH GOLDS TO BUY FOODS!\n");
                 break;
             }
-            case 2: {
+            case 6: {
                 printf("Amount of producing goldrate:\n");
                 int goldrate;
                 scanf("%d", &goldrate);
                 rulers.goldrate=goldrate;
                 break;
             }
-            case 3: {
+            case 2: {
                 printf("Numbers of soldiers(2 GOLDS ARE NEEDED):\n");
                 int soldiers;
                 scanf("%d", &soldiers);
@@ -126,7 +125,7 @@ int main(void) {
                 else printf("YOU DON'T HAVE ENOUGH GOLDS TO HIRE A SOLDIER!\n");
                 break;
             }
-            case 4: {
+            case 3: {
                 printf("Numbers of workers(3 FOODS ARE NEEDED):\n");
                 int workers;
                 scanf("%d", &workers);
