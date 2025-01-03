@@ -40,3 +40,10 @@ int generate_number () {
     return -1;
 }
 
+
+void SeparatorLine(char sep,int n) {
+    int i;
+    for (i=0; i<n; i++)
+        printf("%c",sep);
+    printf("\n");
+}
