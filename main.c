@@ -88,7 +88,16 @@ int main(void) {
     printf("How many soldiers do you want?\n");
     int target_soldiers;
     scanf("%d",&target_soldiers);
+
     while(rulers.soldiers < target_soldiers || your_villages < Vcount) {
+        printf("SEE YOUR WEALTH!\n");
+        printf("Gold: %d\n",rulers.gold);
+        printf("Food: %d\n",rulers.food);
+        printf("Soldiers: %d\n",rulers.soldiers);
+        printf("Workers: %d\n",rulers.workers);
+        printf("Goldrate: %d\n",rulers.goldrate);
+        printf("Food: %d\n",rulers.foodrate);
+
         printf("MENU:\n");
         printf("0.Exit\n");
         printf("1.Producing foodrate\n");
@@ -136,7 +145,7 @@ int main(void) {
                 break;
             }
             default:
-                printf("Wrong choice!\n");
+                printf("WRONG CHOISE!\n");
         }
         rulers.gold+=rulers.goldrate;
         rulers.food+=rulers.foodrate;
