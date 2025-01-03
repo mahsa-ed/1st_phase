@@ -7,12 +7,9 @@
 
 typedef struct {
     int x, y;
-} coordinates;
+} Coordinates;
 
-typedef struct {
-    int front, rear;
-    coordinates items[17];
-} Queue;
 
 #endif //INC_1ST_PHASE_MY_STRUCT_H
 
+#define MAXSIZE 17
