@@ -8,17 +8,6 @@
 
 char Map[MAXSIZE][MAXSIZE];
 
-
-
-typedef struct {
-    int soldiers;
-    int goldrate;
-    int foodrate;
-    int workers;
-    int gold;
-    int food;
-}Ruler;
-
 int main(void) {
     srand (time (NULL) ) ;
     int size;
