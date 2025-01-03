@@ -95,7 +95,7 @@ int main(void) {
         printf("Soldiers: %d\n",rulers.soldiers);
         printf("Workers: %d\n",rulers.workers);
         printf("Goldrate: %d\n",rulers.goldrate);
-        printf("Food: %d\n",rulers.foodrate);
+        printf("Foodrate: %d\n",rulers.foodrate);
         separatorLine('_',60);
 
         printMap(size,Map);
