@@ -15,7 +15,6 @@ int main(void) {
     int i, j, k;
     Ruler rulers;
 
-
     printf("please enter the map size ");
     scanf("%d", &size);
     int valu[size][size];
@@ -54,7 +53,6 @@ int main(void) {
         Map[i - 1][j - 1] = 'X';
     }
 
-    printMap(size,Map);
     for(k=0;k<Ccount;k++) {
         for(j=0;j<Vcount;j++) {
             Map[Castle[k].x][Castle[k].y] = '1';
@@ -77,6 +75,7 @@ int main(void) {
         }
     }
 
+    separatorLine('_',60);
     rulers.soldiers=0;
     rulers.food=0;
     rulers.workers=1;
@@ -97,7 +96,9 @@ int main(void) {
         printf("Workers: %d\n",rulers.workers);
         printf("Goldrate: %d\n",rulers.goldrate);
         printf("Food: %d\n",rulers.foodrate);
+        separatorLine('_',60);
 
+        printMap(size,Map);
         printf("MENU:\n");
         printf("0.Exit\n");
         printf("1.Producing foodrate\n");
@@ -116,7 +117,7 @@ int main(void) {
                     rulers.foodrate+= number;
                     rulers.gold-=(1*number);
                 }
-                else printf("YOU DON'T HAVE ENOUGH GOLDS TO BUY %d FOODS!\n",number);
+                else printf("YOU DON'T HAVE ENOUGH GOLDS TO BUY %d FOODS!TRY AGAIN\n",number);
                 break;
             }
             case 2: {
@@ -127,7 +128,7 @@ int main(void) {
                     rulers.soldiers+=number;
                     rulers.gold-=(2*number);
                 }
-                else printf("YOU DON'T HAVE ENOUGH GOLDS TO HIRE %d SOLDIER!\n",number);
+                else printf("YOU DON'T HAVE ENOUGH GOLDS TO HIRE %d SOLDIER!TRY AGAIN\n",number);
                 break;
             }
             case 3: {
@@ -138,14 +139,14 @@ int main(void) {
                     rulers.workers+=number;
                     rulers.food-=(3*number);
                 }
-                else printf("YOU DON'T HAVE ENOUGH FOODS TO HIRE %d WORKER!\n",number);
+                else printf("YOU DON'T HAVE ENOUGH FOODS TO HIRE %d WORKER!TRY AGAIN\n",number);
                 break;
             }
             case 4: {
                 break;
             }
             default:
-                printf("WRONG CHOISE!\n");
+                printf("WRONG CHOISE!TRY AGAIN\n");
         }
         rulers.gold+=rulers.goldrate;
         rulers.food+=rulers.foodrate;
