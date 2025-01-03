@@ -73,15 +73,19 @@ int main(void) {
     }
     printMap(size,Map);
 
+    rulers.soldiers=0;
+    rulers.food=0;
     rulers.workers=1;
     rulers.gold=5;
     rulers.goldrate=1;
     int choise;
     while(choise != 0) {
+        rulers.gold+=rulers.goldrate;
+        rulers.food+=rulers.foodrate;
         printf("MENU:\n");
         printf("0.Exit\n");
-        printf("1.Producing food\n");
-        printf("2.Producing gold\n");
+        printf("1.Producing foodrate\n");
+        printf("2.Producing goldrate\n");
         printf("3.Hiring soldiers\n");
         printf("4.Hiring workers\n");
         scanf("%d",&choise);
@@ -89,31 +93,34 @@ int main(void) {
             case 0:
                 exit(0);
             case 1: {
-                printf("Amount of producing food:\n");
-                int food;
-                scanf("%d", &food);
-                rulers.food=food;
+                printf("Amount of producing foodrate(1 GOLD IS NEEDED):\n");
+                int foodrate;
+                scanf("%d", &foodrate);
+                if(rulers.gold >= 1)rulers.food=foodrate;
+                else printf("YOU DON'T HAVE ENOUGH GOLDS TO HAVE FOODS!");
                 break;
             }
             case 2: {
-                printf("Amount of producing gold:\n");
-                int gold;
-                scanf("%d", &gold);
-                rulers.gold=gold;
+                printf("Amount of producing goldrate:\n");
+                int goldrate;
+                scanf("%d", &goldrate);
+                rulers.goldrate=goldrate;
                 break;
             }
             case 3: {
-                printf("Numbers of soldiers:\n");
+                printf("Numbers of soldiers(2 GOLDS ARE NEEDED):\n");
                 int soldiers;
                 scanf("%d", &soldiers);
-                rulers.soldiers=soldiers;
+                if(rulers.gold>=2)rulers.soldiers=soldiers;
+                else printf("YOU DON'T HAVE ENOUGH GOLDS TO HAVE SOLDIERS!");
                 break;
             }
             case 4: {
-                printf("Numbers of workers:\n");
+                printf("Numbers of workers(3 FOODS ARE NEEDED):\n");
                 int workers;
                 scanf("%d", &workers);
-                rulers.workers+=workers;
+                if(rulers.food>=3)rulers.workers+=workers;
+                else printf("YOU DON'T HAVE ENOUGH FOODS TO HAVE WORKERS!");
                 break;
             }
             default:
@@ -121,4 +128,3 @@ int main(void) {
         }
     }
 }
-
