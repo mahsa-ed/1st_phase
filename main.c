@@ -96,7 +96,7 @@ int main(void) {
                 printf("Amount of producing foodrate(1 GOLD IS NEEDED):\n");
                 int foodrate;
                 scanf("%d", &foodrate);
-                if(rulers.gold >= 1)rulers.food=foodrate;
+                if(rulers.gold >= 1)rulers.foodrate=foodrate;
                 else printf("YOU DON'T HAVE ENOUGH GOLDS TO HAVE FOODS!");
                 break;
             }
