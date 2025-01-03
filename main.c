@@ -31,17 +31,18 @@ int main(void) {
     for (k = 0; k < Ccount; k++) {
         scanf("%d %d", &i, &j);
         Map[i - 1][j - 1] = 'C';
-        Castle[k].x= i-1 ; //*
-        Castle[k].y= j-1 ; //*
+        Castle[k].x= i-1 ;
+        Castle[k].y= j-1 ;
     }
 
     printf("please enter the number of villages, coordinates,gold rate and food rate ");
     scanf("%d", &Vcount); //قرار گیری روستا ها و نرخ تولید
     Coordinates Village[Vcount];
+    Rates V[Vcount];
     for (k = 0; k < Vcount; k++) {
         scanf("%d %d", &i, &j);
         Map[i - 1][j - 1] = 'V';
-        scanf("%d %d", &goldRate[i - 1][j - 1], &foodRate[i - 1][j - 1]);
+        scanf("%d %d",&V[k].goldRate, &V[k].foodRate);
         Village[k].x = i-1;
         Village[k].y = j-1;
     }
@@ -51,14 +52,6 @@ int main(void) {
     for (k = 0; k < Xcount; k++) {
         scanf("%d %d", &i, &j);
         Map[i - 1][j - 1] = 'X';
-    }
-
-    for (i = 0; i < size; i++) { //ارزش دادن به خانه های خالی با عدد تصادفی از1 تا 4
-        for (j = 0; j < size; j++) {
-            if (Map[i][j] == '1') {
-                valu[i][j] = generate_number();
-            }
-        }
     }
 
     printMap(size,Map);
@@ -72,6 +65,17 @@ int main(void) {
         }
     }
     printMap(size,Map);
+
+    for (i = 0; i < size; i++) { //ارزش دادن به خانه های خالی با عدد تصادفی از1 تا 4
+        for (j = 0; j < size; j++) {
+            if (Map[i][j] == '1') {
+                char temp;
+                valu[i][j] = generate_number();
+                temp= valu[i][j]+'0';
+                Map[i][j] = temp;
+            }
+        }
+    }
 
     rulers.soldiers=0;
     rulers.food=0;
