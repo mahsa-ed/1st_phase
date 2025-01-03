@@ -83,18 +83,18 @@ int main(void) {
     rulers.gold=5;
     rulers.goldrate=1;
     rulers.foodrate=0;
+    int your_villages = 0;
     int choise;
     printf("How many soldiers do you want?\n");
     int target_soldiers;
     scanf("%d",&target_soldiers);
-    while(rulers.soldiers < target_soldiers) {
-        rulers.gold+=rulers.goldrate;
-        rulers.food+=rulers.foodrate;
+    while(rulers.soldiers < target_soldiers || your_villages < Vcount) {
         printf("MENU:\n");
         printf("0.Exit\n");
         printf("1.Producing foodrate\n");
         printf("2.Hiring soldiers\n");
         printf("3.Hiring workers\n");
+        printf("4.Road construction\n");
         scanf("%d",&choise);
         switch (choise) {
             case 0:
@@ -103,31 +103,42 @@ int main(void) {
                 printf("Amount of producing foodrate(1 GOLD IS NEEDED):\n");
                 int number;
                 scanf("%d", &number);
-                if(rulers.gold >=number*1){
+                if(rulers.gold >=(1*number)){
                     rulers.foodrate+= number;
-                    rulers.gold-=(number*1);
+                    rulers.gold-=(1*number);
                 }
                 else printf("YOU DON'T HAVE ENOUGH GOLDS TO BUY %d FOODS!\n",number);
                 break;
             }
             case 2: {
                 printf("Numbers of soldiers(2 GOLDS ARE NEEDED):\n");
-                int soldiers;
-                scanf("%d", &soldiers);
-                if(rulers.gold>=2)rulers.soldiers=soldiers;
-                else printf("YOU DON'T HAVE ENOUGH GOLDS TO HIRE A SOLDIER!\n");
+                int number;
+                scanf("%d", &number);
+                if(rulers.gold>=(2*number)) {
+                    rulers.soldiers+=number;
+                    rulers.gold-=(2*number);
+                }
+                else printf("YOU DON'T HAVE ENOUGH GOLDS TO HIRE %d SOLDIER!\n",number);
                 break;
             }
             case 3: {
                 printf("Numbers of workers(3 FOODS ARE NEEDED):\n");
-                int workers;
-                scanf("%d", &workers);
-                if(rulers.food>=3)rulers.workers+=workers;
-                else printf("YOU DON'T HAVE ENOUGH FOODS TO HIRE A WORKER!\n");
+                int number;
+                scanf("%d", &number);
+                if(rulers.food>=(3*number)) {
+                    rulers.workers+=number;
+                    rulers.food-=(3*number);
+                }
+                else printf("YOU DON'T HAVE ENOUGH FOODS TO HIRE %d WORKER!\n",number);
+                break;
+            }
+            case 4: {
                 break;
             }
             default:
                 printf("Wrong choice!\n");
         }
+        rulers.gold+=rulers.goldrate;
+        rulers.food+=rulers.foodrate;
     }
 }
