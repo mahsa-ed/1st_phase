@@ -9,6 +9,14 @@ typedef struct {
     int x, y;
 } Coordinates;
 
+typedef struct {
+    int soldiers;
+    int goldrate;
+    int foodrate;
+    int workers;
+    int gold;
+    int food;
+}Ruler;
 
 #endif //INC_1ST_PHASE_MY_STRUCT_H
 
