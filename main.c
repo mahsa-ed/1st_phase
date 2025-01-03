@@ -75,7 +75,7 @@ int main(void) {
         }
     }
 
-    separatorLine('_',60);
+    SeparatorLine('_',60);
     rulers.soldiers=0;
     rulers.food=0;
     rulers.workers=1;
@@ -96,7 +96,7 @@ int main(void) {
         printf("Workers: %d\n",rulers.workers);
         printf("Goldrate: %d\n",rulers.goldrate);
         printf("Foodrate: %d\n",rulers.foodrate);
-        separatorLine('_',60);
+        SeparatorLine('_',60);
 
         printMap(size,Map);
         printf("MENU:\n");
