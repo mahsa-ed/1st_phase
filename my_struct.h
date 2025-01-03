@@ -18,6 +18,10 @@ typedef struct {
     int food;
 }Ruler;
 
+typedef struct {
+    int goldRate,foodRate;
+} Rates;
+
 #endif //INC_1ST_PHASE_MY_STRUCT_H
 
 #define MAXSIZE 17
