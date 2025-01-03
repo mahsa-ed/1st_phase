@@ -98,7 +98,7 @@ int main(void) {
         scanf("%d",&choise);
         switch (choise) {
             case 0:
-                exit(0);
+                break;
             case 1: {
                 printf("Amount of producing foodrate(1 GOLD IS NEEDED):\n");
                 int number;
@@ -107,14 +107,7 @@ int main(void) {
                     rulers.foodrate+= number;
                     rulers.gold-=(number*1);
                 }
-                else printf("YOU DON'T HAVE ENOUGH GOLDS TO BUY FOODS!\n");
-                break;
-            }
-            case 6: {
-                printf("Amount of producing goldrate:\n");
-                int goldrate;
-                scanf("%d", &goldrate);
-                rulers.goldrate=goldrate;
+                else printf("YOU DON'T HAVE ENOUGH GOLDS TO BUY %d FOODS!\n",number);
                 break;
             }
             case 2: {
