@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "raylib.h"
+//#include "raylib.h"
 #include "file.h"
 #include "my_struct.h"
 #include "findPath.h"
@@ -17,7 +17,7 @@ int main(void) {
 
     printf("please enter the map size ");
     scanf("%d", &size);
-    int valu[size][size];
+    int value[size][size];
     for (i = 0; i < size; i++) {
         for (j = 0; j < size; j++) {
             Map[i][j] = '1';
@@ -53,27 +53,25 @@ int main(void) {
         Map[i - 1][j - 1] = 'X';
     }
 
-    for(k=0;k<Ccount;k++) {
-        for(j=0;j<Vcount;j++) {
-            Map[Castle[k].x][Castle[k].y] = '1';
-            Map[Village[j].x][Village[j].y] = '1';
-            findPath(Map,size,Castle[k].x,Castle[k].y,Village[j].x,Village[j].y);
-            Map[Castle[k].x][Castle[k].y] = 'C';
-            Map[Village[j].x][Village[j].y] = 'V';
-        }
-    }
-    printMap(size,Map);
+    //for(k=0;k<Ccount;k++) {
+      //  for(j=0;j<Vcount;j++) {
+        //    Map[Castle[k].x][Castle[k].y] = '1';
+          //  Map[Village[j].x][Village[j].y] = '1';
+            //findPath(Map,size,Castle[k].x,Castle[k].y,Village[j].x,Village[j].y);
+          //  Map[Castle[k].x][Castle[k].y] = 'C';
+            //Map[Village[j].x][Village[j].y] = 'V';
+      //  }
+   // }
 
     for (i = 0; i < size; i++) { //ارزش دادن به خانه های خالی با عدد تصادفی از1 تا 4
         for (j = 0; j < size; j++) {
             if (Map[i][j] == '1') {
-                char temp;
-                valu[i][j] = generate_number();
-                temp= valu[i][j]+'0';
-                Map[i][j] = temp;
+                value[i][j] = generate_number();
+                Map[i][j]= value[i][j]+'0';
             }
         }
     }
+    printMap(size,Map);
 
     SeparatorLine('_',60);
     rulers.soldiers=0;
@@ -143,6 +141,22 @@ int main(void) {
                 break;
             }
             case 4: {
+                int x,y;
+                printf("Enter the coordinate of new road. x:  y:\n");
+                scanf("%d %d",&x,&y);
+                x--, y--;
+                if (!CheckRoad(Map,x,y)) printf("UNABLE TO BUILD A ROAD!TRY AGAIN\n");
+                else {
+                    if(rulers.workers>=value[x][y]) {
+                        Map[x][y]='R';
+                        int vNum=CheckVillage(Map,x,y,&rulers.goldrate,&rulers.foodrate,Village,V,Vcount);
+                        your_villages+=vNum+=vNum;
+                    }
+                    else {
+                        value[x][y]-=rulers.workers;
+                        Map[x][y]= value[x][y]+'0';
+                    }
+                }
                 break;
             }
             default:
@@ -151,4 +165,5 @@ int main(void) {
         rulers.gold+=rulers.goldrate;
         rulers.food+=rulers.foodrate;
     }
+    printf("YOU WIN!");
 }
