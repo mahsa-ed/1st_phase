@@ -54,7 +54,7 @@ int floodFillPath(char arr[][MAXSIZE],int size, int x, int y, int targetX, int t
 void findPath(char arr[][MAXSIZE],int size, int startX, int startY, int targetX, int targetY) {
     int visited[MAXSIZE][MAXSIZE] = {0}; // آرایه برای ثبت خانه‌های بازدید شده
     if (floodFillPath(arr,size, startX, startY, targetX, targetY, visited)) {
-        printf("Path found.\n");
+        //printf("Path found.\n");
     } else {
         printf("No path found.\n");
     }
