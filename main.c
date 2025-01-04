@@ -5,6 +5,7 @@
 #include "file.h"
 #include "my_struct.h"
 #include "findPath.h"
+#include "printColorMap.h"
 
 char Map[MAXSIZE][MAXSIZE];
 
@@ -71,7 +72,7 @@ int main(void) {
             }
         }
     }
-    printMap(size,Map);
+    colorMap(Map,size);
 
     SeparatorLine('_',60);
     rulers.soldiers=0;
@@ -96,7 +97,7 @@ int main(void) {
         printf("Foodrate: %d\n",rulers.foodrate);
         SeparatorLine('_',60);
 
-        printMap(size,Map);
+        colorMap(Map,size);
         printf("MENU:\n");
         printf("0.Exit\n");
         printf("1.Producing food\n");
@@ -112,7 +113,7 @@ int main(void) {
                 int number;
                 scanf("%d", &number);
                 if(rulers.gold >=(1*number)){
-                    rulers.food+= number;
+                    rulers.foodrate+= number;
                     rulers.gold-=(1*number);
                 }
                 else printf("YOU DON'T HAVE ENOUGH GOLDS TO BUY %d FOODS!TRY AGAIN\n",number);
@@ -150,7 +151,7 @@ int main(void) {
                     if(rulers.workers>=value[x][y]) {
                         Map[x][y]='R';
                         int vNum=CheckVillage(Map,x,y,&rulers.goldrate,&rulers.foodrate,Village,V,Vcount);
-                        your_villages+=vNum+=vNum;
+                        your_villages+=vNum;
                     }
                     else {
                         value[x][y]-=rulers.workers;
