@@ -47,3 +47,16 @@ void SeparatorLine(char sep,int n) {
         printf("%c",sep);
     printf("\n");
 }
+
+int CheckRoad(char Map[][MAXSIZE],int x,int y) { //***
+    if (Map[x][y] !='1' && Map[x][y] !='2' && Map[x][y] !='3' && Map[x][y] !='4') return 0;
+    int i;
+    int rowDir[] = {1, -1, 0, 0};
+    int colDir[] = {0, 0, 1, -1};
+    char temp;
+    for(i=0;i<4;i++) {
+        temp=Map[x+rowDir[i]][y+colDir[i]];
+        if(temp=='C' || temp=='R' || temp=='v') return 1;
+    }
+    return 0;
+}
