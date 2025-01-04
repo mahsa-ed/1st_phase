@@ -11,8 +11,6 @@
 #include <time.h>
 #include "my_struct.h"
 
-
-
 void printMap(int size,char map[][MAXSIZE]){
     int i,j;
     for (i = 0; i < size; i++){
@@ -40,7 +38,6 @@ int generate_number () {
     return -1;
 }
 
-
 void SeparatorLine(char sep,int n) {
     int i;
     for (i=0; i<n; i++)
@@ -48,7 +45,7 @@ void SeparatorLine(char sep,int n) {
     printf("\n");
 }
 
-int CheckRoad(char Map[][MAXSIZE],int x,int y) { //***
+int CheckRoad(char Map[][MAXSIZE],int x,int y) {
     if (Map[x][y] !='1' && Map[x][y] !='2' && Map[x][y] !='3' && Map[x][y] !='4') return 0;
     int i;
     int rowDir[] = {1, -1, 0, 0};
@@ -60,3 +57,27 @@ int CheckRoad(char Map[][MAXSIZE],int x,int y) { //***
     }
     return 0;
 }
+
+int CheckVillage(char Map[][MAXSIZE],int x,int y,int *CgoldRate,int *CfoodRate,Coordinates villages[],Rates V[],int size) {
+    int i,j,vNum=0;
+    int newX,newY;
+    int rowDir[] = {1, -1, 0, 0};
+    int colDir[] = {0, 0, 1, -1};
+    for(i=0;i<4;i++) {
+        if (Map[x+rowDir[i]][y+colDir[i]]=='V') {
+            vNum++;
+            newX=x+rowDir[i];
+            newY=y+colDir[i];
+            Map[newX][newY]='v';
+            for(j=0; villages[j].x!=newX ||villages[j].y!=newY;j++);
+            *CgoldRate+=V[j].goldRate;
+            *CfoodRate+=V[j].foodRate;
+        }
+    }
+}
+
+void clearScreen() {
+    system("cls");
+}
+
+
