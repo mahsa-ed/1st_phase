@@ -99,7 +99,7 @@ int main(void) {
         printMap(size,Map);
         printf("MENU:\n");
         printf("0.Exit\n");
-        printf("1.Producing foodrate\n");
+        printf("1.Producing food\n");
         printf("2.Hiring soldiers\n");
         printf("3.Hiring workers\n");
         printf("4.Build a road\n");
@@ -108,11 +108,11 @@ int main(void) {
             case 0:
                 break;
             case 1: {
-                printf("Amount of producing foodrate(1 GOLD IS NEEDED):\n");
+                printf("Amount of producing food(1 GOLD IS NEEDED):\n");
                 int number;
                 scanf("%d", &number);
                 if(rulers.gold >=(1*number)){
-                    rulers.foodrate+= number;
+                    rulers.food+= number;
                     rulers.gold-=(1*number);
                 }
                 else printf("YOU DON'T HAVE ENOUGH GOLDS TO BUY %d FOODS!TRY AGAIN\n",number);
