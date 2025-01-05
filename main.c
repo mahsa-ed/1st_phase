@@ -113,7 +113,7 @@ int main(void) {
                 int number;
                 scanf("%d", &number);
                 if(rulers.gold >=(1*number)){
-                    rulers.foodrate+= number;
+                    rulers.food+= number;
                     rulers.gold-=(1*number);
                 }
                 else printf("YOU DON'T HAVE ENOUGH GOLDS TO BUY %d FOODS!TRY AGAIN\n",number);
