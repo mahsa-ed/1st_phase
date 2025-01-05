@@ -106,8 +106,11 @@ int main(void) {
         printf("4.Build a road\n");
         scanf("%d",&choise);
         switch (choise) {
-            case 0:
+            case 0: {
+                rulers.gold+=rulers.goldrate;
+                rulers.food+=rulers.foodrate;
                 break;
+            }
             case 1: {
                 printf("Amount of producing food(1 GOLD IS NEEDED):\n");
                 int number;
@@ -115,6 +118,8 @@ int main(void) {
                 if(rulers.gold >=(1*number)){
                     rulers.food+= number;
                     rulers.gold-=(1*number);
+                    rulers.gold+=rulers.goldrate;
+                    rulers.food+=rulers.foodrate;
                 }
                 else printf("YOU DON'T HAVE ENOUGH GOLDS TO BUY %d FOODS!TRY AGAIN\n",number);
                 break;
@@ -126,6 +131,8 @@ int main(void) {
                 if(rulers.gold>=(2*number)) {
                     rulers.soldiers+=number;
                     rulers.gold-=(2*number);
+                    rulers.gold+=rulers.goldrate;
+                    rulers.food+=rulers.foodrate;
                 }
                 else printf("YOU DON'T HAVE ENOUGH GOLDS TO HIRE %d SOLDIER!TRY AGAIN\n",number);
                 break;
@@ -137,6 +144,8 @@ int main(void) {
                 if(rulers.food>=(3*number)) {
                     rulers.workers+=number;
                     rulers.food-=(3*number);
+                    rulers.gold+=rulers.goldrate;
+                    rulers.food+=rulers.foodrate;
                 }
                 else printf("YOU DON'T HAVE ENOUGH FOODS TO HIRE %d WORKER!TRY AGAIN\n",number);
                 break;
@@ -157,14 +166,14 @@ int main(void) {
                         value[x][y]-=rulers.workers;
                         Map[x][y]= value[x][y]+'0';
                     }
+                    rulers.gold+=rulers.goldrate;
+                    rulers.food+=rulers.foodrate;
                 }
                 break;
             }
             default:
                 printf("WRONG CHOISE!TRY AGAIN\n");
         }
-        rulers.gold+=rulers.goldrate;
-        rulers.food+=rulers.foodrate;
     }
     printf("YOU WIN!");
 }
