@@ -29,9 +29,13 @@ int main(void) {
     printf("please enter the number of castles and coordinates ");
     scanf("%d", &Ccount); //قرار گیری قلمرو ها
     Coordinates Castle[Ccount];
-    for (k = 0; k < Ccount; k++) {
+    scanf("%d %d", &i, &j);
+    Map[i - 1][j - 1] = 'C';
+    Castle[0].x= i-1 ;
+    Castle[0].y= j-1 ;
+    for (k = 1; k < Ccount; k++) {
         scanf("%d %d", &i, &j);
-        Map[i - 1][j - 1] = 'C';
+        Map[i - 1][j - 1] = 'c';
         Castle[k].x= i-1 ;
         Castle[k].y= j-1 ;
     }
