@@ -77,25 +77,30 @@ int main(void) {
         do {
             SeparatorLine('_',60);
             printf("player 1's turn\n");
-            menuResult=Menu(map1,map2,size,&player1,vRate,Village,'R');
+            menuResult=Menu(map1,map2,size,&player1, &player2 ,vRate,Village,'R');
             if(menuResult==1) {
                 player1.gold+=player1.goldrate;
                 player1.food+=player1.foodrate;
             }
         }while(menuResult==0);
-        if (menuResult==-1) sw=0;
+        if (menuResult==-1) {
+            printf("PLAYER 1 WIN THE GAME!");
+            sw=0;
+        }
         else{
             do {
                 SeparatorLine('_',60);
                 printf("player 2's turn\n");
-                menuResult=Menu(map2,map1,size,&player2,vRate,Village,'r');
+                menuResult=Menu(map2,map1,size,&player2,&player2, vRate,Village,'r');
                 if(menuResult==1) {
                     player2.gold+=player1.goldrate;
                     player2.food+=player1.foodrate;
                 }
             }while(menuResult==0);
-            if (menuResult==-1) sw=0;
+            if (menuResult==-1) {
+                printf("PLAYER 2 WIN THE GAME!");
+                sw=0;
+            }
         }
     }
-    printf("YOU WIN!");
 }
