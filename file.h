@@ -58,26 +58,32 @@ int CheckRoad(char Map[][MAXSIZE],int x,int y) {
     return 0;
 }
 
-int CheckVillage(char Map[][MAXSIZE],int x,int y,int *CgoldRate,int *CfoodRate,Coordinates villages[],Rates V[],int size) {
-    int i,j,vNum=0;
+void CheckVillage(char Map[][MAXSIZE],int x,int y,int *CgoldRate,int *CfoodRate,Coordinates villages[],Rates V[]) {
+    int i,j;
     int newX,newY;
     int rowDir[] = {1, -1, 0, 0};
     int colDir[] = {0, 0, 1, -1};
     for(i=0;i<4;i++) {
         if (Map[x+rowDir[i]][y+colDir[i]]=='V') {
-            vNum++;
             newX=x+rowDir[i];
             newY=y+colDir[i];
             Map[newX][newY]='v';
             for(j=0; villages[j].x!=newX ||villages[j].y!=newY;j++);
             *CgoldRate+=V[j].goldRate;
             *CfoodRate+=V[j].foodRate;
+            V[j].goldRate=0 ,V[j].foodRate=0;//
+            return;
         }
     }
 }
 
-void clearScreen() {
-    system("cls");
+void copyMap(const char Map[][MAXSIZE],char Map2[][MAXSIZE],int size) {
+    int i,j;
+    for(i=0;i<size;i++) {
+        for(j=0;j<size;j++) {
+            Map2[i][j]=Map[i][j];
+        }
+    }
 }
 
 
