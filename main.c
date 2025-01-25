@@ -15,7 +15,6 @@ int main(void) {
     Ruler player1={0, 1, 0, 1, 5, 0};
     Ruler player2={0, 1, 0, 1, 5, 0};
     char map1[MAXSIZE][MAXSIZE], map2[MAXSIZE][MAXSIZE];
-    Ruler rulers= {0, 1, 0, 1, 5, 0};
 
     printf("please enter the map size ");
     scanf("%d", &size);
