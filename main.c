@@ -77,7 +77,7 @@ int main(void) {
         do {
             SeparatorLine('_',60);
             printf("player 1's turn\n");
-            menuResult=Menu(map1,map2,size,&player1, &player2 ,vRate,Village,'R');
+            menuResult=Menu(map1,map2,Map,size,&player1, &player2 ,vRate,Village,'R');
             if(menuResult==1) {
                 player1.gold+=player1.goldrate;
                 player1.food+=player1.foodrate;
@@ -90,8 +90,8 @@ int main(void) {
         else{
             do {
                 SeparatorLine('_',60);
-                printf("player 2's turn\n");
-                menuResult=Menu(map2,map1,size,&player2,&player2, vRate,Village,'r');
+                printf("player 2's turn:\n");
+                menuResult=Menu(map2,map1,Map,size,&player2,&player1, vRate,Village,'r');
                 if(menuResult==1) {
                     player2.gold+=player1.goldrate;
                     player2.food+=player1.foodrate;
