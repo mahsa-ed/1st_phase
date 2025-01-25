@@ -26,7 +26,7 @@ int main(void) {
         }
     }
 
-    printf("please enter the coordinates of castles");
+    printf("please enter the number of castles and coordinates ");
     scanf("%d", &Ccount); //قرار گیری قلمرو ها
     Coordinates Castle[Ccount];
     for (k = 0; k < Ccount; k++) {
