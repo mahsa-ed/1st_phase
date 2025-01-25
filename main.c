@@ -1,31 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-//#include "raylib.h"
-#include "file.h"
-#include "my_struct.h"
+
 #include "findPath.h"
-#include "printColorMap.h"
+#include "actionsMenu.h" //#include "file.h", "my_struct.h", "printColorMap.h"
 
 char Map[MAXSIZE][MAXSIZE];
 
 int main(void) {
     srand (time (NULL) ) ;
-    int size;
+    int size,value;
     int Vcount, Xcount, Ccount;
     int i, j, k;
-    Ruler rulers;
+    Ruler player1={0, 1, 0, 1, 5, 0};
+    Ruler player2={0, 1, 0, 1, 5, 0};
+    char map1[MAXSIZE][MAXSIZE], map2[MAXSIZE][MAXSIZE];
+    Ruler rulers= {0, 1, 0, 1, 5, 0};
 
     printf("please enter the map size ");
     scanf("%d", &size);
-    int value[size][size];
+    //int values[size][size];
     for (i = 0; i < size; i++) {
         for (j = 0; j < size; j++) {
             Map[i][j] = '1';
         }
     }
 
-    printf("please enter the number of castles and coordinates ");
+    printf("please enter the coordinates of castles");
     scanf("%d", &Ccount); //قرار گیری قلمرو ها
     Coordinates Castle[Ccount];
     for (k = 0; k < Ccount; k++) {
@@ -38,11 +39,11 @@ int main(void) {
     printf("please enter the number of villages, coordinates,gold rate and food rate ");
     scanf("%d", &Vcount); //قرار گیری روستا ها و نرخ تولید
     Coordinates Village[Vcount];
-    Rates V[Vcount];
+    Rates vRate[Vcount];
     for (k = 0; k < Vcount; k++) {
         scanf("%d %d", &i, &j);
         Map[i - 1][j - 1] = 'V';
-        scanf("%d %d",&V[k].goldRate, &V[k].foodRate);
+        scanf("%d %d",&vRate[k].goldRate, &vRate[k].foodRate);
         Village[k].x = i-1;
         Village[k].y = j-1;
     }
@@ -54,125 +55,42 @@ int main(void) {
         Map[i - 1][j - 1] = 'X';
     }
 
-    //for(k=0;k<Ccount;k++) {
-      //  for(j=0;j<Vcount;j++) {
-        //    Map[Castle[k].x][Castle[k].y] = '1';
-          //  Map[Village[j].x][Village[j].y] = '1';
-            //findPath(Map,size,Castle[k].x,Castle[k].y,Village[j].x,Village[j].y);
-          //  Map[Castle[k].x][Castle[k].y] = 'C';
-            //Map[Village[j].x][Village[j].y] = 'V';
-      //  }
-   // }
-
     for (i = 0; i < size; i++) { //ارزش دادن به خانه های خالی با عدد تصادفی از1 تا 4
         for (j = 0; j < size; j++) {
             if (Map[i][j] == '1') {
-                value[i][j] = generate_number();
-                Map[i][j]= value[i][j]+'0';
+                value = generate_number();
+                Map[i][j]= value+'0';
             }
         }
     }
     colorMap(Map,size);
+    copyMap(Map,map1,size);
+    copyMap(Map,map2,size);
 
-    SeparatorLine('_',60);
-    rulers.soldiers=0;
-    rulers.food=0;
-    rulers.workers=1;
-    rulers.gold=5;
-    rulers.goldrate=1;
-    rulers.foodrate=0;
-    int your_villages = 0;
-    int choise;
-    printf("How many soldiers do you want?\n");
-    int target_soldiers;
-    scanf("%d",&target_soldiers);
+    int sw=1,menuResult;
+    while(sw) {
 
-    while(rulers.soldiers < target_soldiers || your_villages < Vcount) {
-        printf("SEE YOUR WEALTH!\n");
-        printf("Gold: %d\n",rulers.gold);
-        printf("Food: %d\n",rulers.food);
-        printf("Soldiers: %d\n",rulers.soldiers);
-        printf("Workers: %d\n",rulers.workers);
-        printf("Goldrate: %d\n",rulers.goldrate);
-        printf("Foodrate: %d\n",rulers.foodrate);
-        SeparatorLine('_',60);
-
-        colorMap(Map,size);
-        printf("MENU:\n");
-        printf("0.Exit\n");
-        printf("1.Producing food\n");
-        printf("2.Hiring soldiers\n");
-        printf("3.Hiring workers\n");
-        printf("4.Build a road\n");
-        scanf("%d",&choise);
-        switch (choise) {
-            case 0: {
-                rulers.gold+=rulers.goldrate;
-                rulers.food+=rulers.foodrate;
-                break;
+        do {
+            SeparatorLine('_',60);
+            printf("player 1's turn\n");
+            menuResult=Menu(map1,map2,size,&player1,vRate,Village,'R');
+            if(menuResult==1) {
+                player1.gold+=player1.goldrate;
+                player1.food+=player1.foodrate;
             }
-            case 1: {
-                printf("Amount of producing food(1 GOLD IS NEEDED):\n");
-                int number;
-                scanf("%d", &number);
-                if(rulers.gold >=(1*number)){
-                    rulers.food+= number;
-                    rulers.gold-=(1*number);
-                    rulers.gold+=rulers.goldrate;
-                    rulers.food+=rulers.foodrate;
+        }while(menuResult==0);
+        if (menuResult==-1) sw=0;
+        else{
+            do {
+                SeparatorLine('_',60);
+                printf("player 2's turn\n");
+                menuResult=Menu(map2,map1,size,&player2,vRate,Village,'r');
+                if(menuResult==1) {
+                    player2.gold+=player1.goldrate;
+                    player2.food+=player1.foodrate;
                 }
-                else printf("YOU DON'T HAVE ENOUGH GOLDS TO BUY %d FOODS!TRY AGAIN\n",number);
-                break;
-            }
-            case 2: {
-                printf("Numbers of soldiers(2 GOLDS ARE NEEDED):\n");
-                int number;
-                scanf("%d", &number);
-                if(rulers.gold>=(2*number)) {
-                    rulers.soldiers+=number;
-                    rulers.gold-=(2*number);
-                    rulers.gold+=rulers.goldrate;
-                    rulers.food+=rulers.foodrate;
-                }
-                else printf("YOU DON'T HAVE ENOUGH GOLDS TO HIRE %d SOLDIER!TRY AGAIN\n",number);
-                break;
-            }
-            case 3: {
-                printf("Numbers of workers(3 FOODS ARE NEEDED):\n");
-                int number;
-                scanf("%d", &number);
-                if(rulers.food>=(3*number)) {
-                    rulers.workers+=number;
-                    rulers.food-=(3*number);
-                    rulers.gold+=rulers.goldrate;
-                    rulers.food+=rulers.foodrate;
-                }
-                else printf("YOU DON'T HAVE ENOUGH FOODS TO HIRE %d WORKER!TRY AGAIN\n",number);
-                break;
-            }
-            case 4: {
-                int x,y;
-                printf("Enter the coordinate of new road. x:  y:\n");
-                scanf("%d %d",&x,&y);
-                x--, y--;
-                if (!CheckRoad(Map,x,y)) printf("UNABLE TO BUILD A ROAD!TRY AGAIN\n");
-                else {
-                    if(rulers.workers>=value[x][y]) {
-                        Map[x][y]='R';
-                        int vNum=CheckVillage(Map,x,y,&rulers.goldrate,&rulers.foodrate,Village,V,Vcount);
-                        your_villages+=vNum;
-                    }
-                    else {
-                        value[x][y]-=rulers.workers;
-                        Map[x][y]= value[x][y]+'0';
-                    }
-                    rulers.gold+=rulers.goldrate;
-                    rulers.food+=rulers.foodrate;
-                }
-                break;
-            }
-            default:
-                printf("WRONG CHOISE!TRY AGAIN\n");
+            }while(menuResult==0);
+            if (menuResult==-1) sw=0;
         }
     }
     printf("YOU WIN!");
