@@ -8,9 +8,9 @@
 #include <stdio.h>
 #include "my_struct.h"
 
-void simpleWar(){}
+void destroyRoad(){}
 
-void allOutWar(){}
+void simpleWar(){}
 
 int checkWar(char Map[][MAXSIZE],int x, int y,char yourSign){
     char enemyR, enemyC;
