@@ -11,7 +11,7 @@
 #include "file.h"
 #include "war.h"
 
-int Menu(char yourMap[][MAXSIZE],char enemyMap[][MAXSIZE],int size,Ruler *wealth, Ruler *enemyWealth, Rates vRate[],Coordinates village[],char yoursign) {
+int Menu(char yourMap[][MAXSIZE],char enemyMap[][MAXSIZE],char firstMap[][MAXSIZE], int size,Ruler *wealth, Ruler *enemyWealth, Rates vRate[],Coordinates village[],char yoursign) {
     printf("SEE YOUR WEALTH!\n");
     printf("Gold: %d\n",wealth->gold);
     printf("Food: %d\n",wealth->food);
@@ -87,20 +87,40 @@ int Menu(char yourMap[][MAXSIZE],char enemyMap[][MAXSIZE],int size,Ruler *wealth
                 if(wealth->workers>=(yourMap[x][y]-'0')) {
                     yourMap[x][y]=yoursign;
                     enemyMap[x][y]=yoursign;
-                    int check=checkWar(yourMap,x,y,yoursign);
+                    int Array[2];
+                    int check=checkWar(yourMap,x,y,yoursign,Array);
                     if(check==-1){ //جنگ تمام عیار
                         if (wealth->soldiers > enemyWealth->soldiers)
                             return -1;
                         else {
-                            destroyRoad();
-                            wealth->food=0;
-                            wealth->gold=0;
+                            destroyRoad(x, y, size,yoursign,firstMap,yourMap,enemyMap);
+                            if(wealth->soldiers < enemyWealth->soldiers) {
+                                enemyWealth->food+=wealth->food;
+                                enemyWealth->gold+=wealth->gold;
+                                wealth->food=0;
+                                wealth->gold=0;
+                                printf("You lost the war!\n");
+                            }
+                            else (printf("Equal war!\n"));
                         }
                     }
                     else if(check==0) { //جنگ ساده
-                        simpleWar();
+                        int temp=simpleWar(wealth,enemyWealth);
+                        if (temp==1) {
+                            char enemysign;
+                            if (yoursign=='R') enemysign='r';
+                            else if (yoursign=='r') enemysign='R';
+                            destroyRoad(Array[0], Array[1], size,enemysign,firstMap,yourMap,enemyMap);
+                        }
+                        else if(temp==0) {
+                            destroyRoad(Array[0], Array[1], size,'R',firstMap,yourMap,enemyMap);
+                            destroyRoad(Array[0], Array[1], size,'r',firstMap,yourMap,enemyMap);
+                        }
+                        else if(temp==-1) {
+                            destroyRoad(Array[0], Array[1], size,yoursign,firstMap,yourMap,enemyMap);
+                        }
                     }
-                    CheckVillage(yourMap,x,y,&(wealth->goldrate),&(wealth->foodrate),village,vRate);
+                    CheckVillage(yourMap,enemyMap,x,y,&(wealth->goldrate),&(wealth->foodrate),village,vRate);
                 }
                 else {
                     yourMap[x][y]-=wealth->workers;
