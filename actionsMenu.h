@@ -12,7 +12,7 @@
 #include "war.h"
 
 int Menu(char yourMap[][MAXSIZE],char enemyMap[][MAXSIZE],char firstMap[][MAXSIZE], int size,Ruler *wealth, Ruler *enemyWealth, Rates vRate[],Coordinates village[],char yoursign) {
-    printf("SEE YOUR WEALTH!\n");
+    printf("SEE YOUR WEALTH!\n"); //نمایش دارایی های بازیکن
     printf("Gold: %d\n",wealth->gold);
     printf("Food: %d\n",wealth->food);
     printf("Soldiers: %d\n",wealth->soldiers);
@@ -22,7 +22,7 @@ int Menu(char yourMap[][MAXSIZE],char enemyMap[][MAXSIZE],char firstMap[][MAXSIZ
 
     colorMap(yourMap,size);
 
-    printf("MENU:\n");
+    printf("MENU:\n"); // انتخاب های بازیکن
     printf("0.Exit\n");
     printf("1.Producing food (1 GOLD IS NEEDED)\n");
     printf("2.Hiring soldiers (2 GOLDS ARE NEEDED)\n");
@@ -79,16 +79,16 @@ int Menu(char yourMap[][MAXSIZE],char enemyMap[][MAXSIZE],char firstMap[][MAXSIZ
             printf("Enter the coordinate of new road. x:  y:\n");
             scanf("%d %d",&x,&y);
             x--, y--;
-            if (!CheckRoad(yourMap,x,y,yoursign)) {
+            if (!CheckRoad(yourMap,x,y,yoursign)) { //چک کردن قابل جاده سازی بودن یا نبودن مختصات انتخابی
                 printf("UNABLE TO BUILD A ROAD!TRY AGAIN\n");
                 return 0;
             }
             else {
-                if(wealth->workers>=(yourMap[x][y]-'0')) {
-                    yourMap[x][y]=yoursign;
+                if(wealth->workers>=(yourMap[x][y]-'0')) { //ایجاد جاده
+                    yourMap[x][y]=yoursign; //تغییر نقشه هر دو بازیکن
                     enemyMap[x][y]=yoursign;
                     int Array[2];
-                    int check=checkWar(yourMap,x,y,yoursign,Array);
+                    int check=checkWar(yourMap,x,y,yoursign,Array); //تابع چک کردن وقوع جنگ پس از جاده سازی
                     if(check==-1){ //جنگ تمام عیار
                         if (wealth->soldiers > enemyWealth->soldiers)
                             return -1;
@@ -106,24 +106,24 @@ int Menu(char yourMap[][MAXSIZE],char enemyMap[][MAXSIZE],char firstMap[][MAXSIZ
                     }
                     else if(check==0) { //جنگ ساده
                         int temp=simpleWar(wealth,enemyWealth);
-                        if (temp==1) {
+                        if (temp==1) { //پیروزی بازیکن در جنگ =1
                             char enemysign;
                             if (yoursign=='R') enemysign='r';
                             else if (yoursign=='r') enemysign='R';
                             destroyRoad(Array[0], Array[1], size,enemysign,firstMap,yourMap,enemyMap);
                         }
-                        else if(temp==0) {
+                        else if(temp==0) { // تساوی در جنگ = 0
                             destroyRoad(Array[0], Array[1], size,'R',firstMap,yourMap,enemyMap);
                             destroyRoad(Array[0], Array[1], size,'r',firstMap,yourMap,enemyMap);
                         }
-                        else if(temp==-1) {
+                        else if(temp==-1) { // باخت بازیکن در جنگ = 1-
                             destroyRoad(Array[0], Array[1], size,yoursign,firstMap,yourMap,enemyMap);
                         }
                     }
-                    CheckVillage(yourMap,enemyMap,x,y,&(wealth->goldrate),&(wealth->foodrate),village,vRate);
+                    CheckVillage(yourMap,enemyMap,x,y,&(wealth->goldrate),&(wealth->foodrate),village,vRate); // چک کردن فتح یا عدم فتح روستا
                 }
                 else {
-                    yourMap[x][y]-=wealth->workers;
+                    yourMap[x][y]-=wealth->workers; // کاهش ارزش خونه ها
                 }
                 return 1;
             }
