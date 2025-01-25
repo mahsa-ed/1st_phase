@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
 #include "findPath.h"
 #include "actionsMenu.h" //#include "file.h", "my_struct.h", "printColorMap.h"
 
@@ -12,7 +11,7 @@ int main(void) {
     int size,value;
     int Vcount, Xcount, Ccount;
     int i, j, k;
-    Ruler player1={0, 1, 0, 1, 5, 0};
+    Ruler player1={0, 1, 0, 1, 5, 0}; //دارایی های اولیه بازیکنان
     Ruler player2={0, 1, 0, 1, 5, 0};
     char map1[MAXSIZE][MAXSIZE], map2[MAXSIZE][MAXSIZE];
 
@@ -66,7 +65,7 @@ int main(void) {
         }
     }
     colorMap(Map,size);
-    copyMap(Map,map1,size);
+    copyMap(Map,map1,size); //شخصی سازی نقشه بازی برای هر بازیکن
     copyMap(Map,map2,size);
 
     int sw=1,menuResult;
@@ -75,7 +74,7 @@ int main(void) {
         do {
             SeparatorLine('_',60);
             printf("player 1's turn\n");
-            menuResult=Menu(map1,map2,Map,size,&player1, &player2 ,vRate,Village,'R');
+            menuResult=Menu(map1,map2,Map,size,&player1, &player2 ,vRate,Village,'R'); //فراخوانی تابع انتخاب حرکت
             if(menuResult==1) {
                 player1.gold+=player1.goldrate;
                 player1.food+=player1.foodrate;
@@ -89,7 +88,7 @@ int main(void) {
             do {
                 SeparatorLine('_',60);
                 printf("player 2's turn:\n");
-                menuResult=Menu(map2,map1,Map,size,&player2,&player1, vRate,Village,'r');
+                menuResult=Menu(map2,map1,Map,size,&player2,&player1, vRate,Village,'r'); //فراخوانی تابع انتخاب حرکت
                 if(menuResult==1) {
                     player2.gold+=player1.goldrate;
                     player2.food+=player1.foodrate;
