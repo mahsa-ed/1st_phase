@@ -45,13 +45,13 @@ void SeparatorLine(char sep,int n) { // پرینت خط جدا کننده
     printf("\n");
 }
 
-int CheckRoad(char Map[][MAXSIZE],int x,int y, char yourR) { //چک کردن امکان جاده سازی در یک مختصات
+int CheckRoad(char Map[][MAXSIZE],int x,int y, char yourR,int size) { //چک کردن امکان جاده سازی در یک مختصات
     if (Map[x][y] !='1' && Map[x][y] !='2' && Map[x][y] !='3' && Map[x][y] !='4') return 0;
     int i;
     int rowDir[] = {1, -1, 0, 0};
     int colDir[] = {0, 0, 1, -1};
     char temp;
-    char yourC; // enemyR, enemyC
+    char yourC;// enemyR, enemyC
     if(yourR == 'R') {
         yourC='C';
         //enemyC= 'c';
@@ -63,7 +63,7 @@ int CheckRoad(char Map[][MAXSIZE],int x,int y, char yourR) { //چک کردن ا�
         //enemyR='R';
     }
     for(i=0;i<4;i++) {
-        temp=Map[x+rowDir[i]][y+colDir[i]];
+        if ((x+rowDir[i]<size && x+rowDir[i]>-1) && (y+colDir[i]<size && y+colDir[i]>-1)) temp=Map[x+rowDir[i]][y+colDir[i]];
         if(temp==yourC || temp==yourR) return 1;
         if (temp=='v') {
             int newX=x+rowDir[i];
@@ -76,13 +76,13 @@ int CheckRoad(char Map[][MAXSIZE],int x,int y, char yourR) { //چک کردن ا�
     return 0;
 }
 
-void CheckVillage(char Map1[][MAXSIZE],char Map2[][MAXSIZE],int x,int y,int *CgoldRate,int *CfoodRate,Coordinates villages[],Rates V[]) { // چک کردن فتح روستا
+void CheckVillage(char Map1[][MAXSIZE],char Map2[][MAXSIZE],int x,int y,int *CgoldRate,int *CfoodRate,Coordinates villages[],Rates V[],int size) { // چک کردن فتح روستا
     int i,j;
     int newX,newY;
     int rowDir[] = {1, -1, 0, 0};
     int colDir[] = {0, 0, 1, -1};
     for(i=0;i<4;i++) {
-        if (Map1[x+rowDir[i]][y+colDir[i]]=='V') {
+        if (Map1[x+rowDir[i]][y+colDir[i]]=='V' && (x+rowDir[i]<size && x+rowDir[i]>-1) && (y+colDir[i]<size && y+colDir[i]>-1)) {
             newX=x+rowDir[i];
             newY=y+colDir[i];
             Map1[newX][newY]='v'; //تغییر نقشه هر دو بازیکن
