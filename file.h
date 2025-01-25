@@ -45,15 +45,33 @@ void SeparatorLine(char sep,int n) {
     printf("\n");
 }
 
-int CheckRoad(char Map[][MAXSIZE],int x,int y) {
+int CheckRoad(char Map[][MAXSIZE],int x,int y, char yourR) {
     if (Map[x][y] !='1' && Map[x][y] !='2' && Map[x][y] !='3' && Map[x][y] !='4') return 0;
     int i;
     int rowDir[] = {1, -1, 0, 0};
     int colDir[] = {0, 0, 1, -1};
     char temp;
+    char yourC, enemyR, enemyC;
+    if(yourR == 'R') {
+        yourC='C';
+        enemyC= 'c';
+        enemyR= 'r';
+    }
+    else {
+        yourC='c';
+        enemyC='C';
+        enemyR='R';
+    }
     for(i=0;i<4;i++) {
         temp=Map[x+rowDir[i]][y+colDir[i]];
-        if(temp=='C' || temp=='R' || temp=='v') return 1;
+        if(temp==yourC || temp==yourR) return 1;
+        if (temp=='v') {
+            int newX=x+rowDir[i];
+            int newY=y+colDir[i];
+            for(int j=0;j<4;j++) {
+                if(Map[newX+rowDir[j]][newY+colDir[j]]==yourR) return 1;
+            }
+        }
     }
     return 0;
 }
