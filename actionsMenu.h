@@ -88,13 +88,18 @@ int Menu(char yourMap[][MAXSIZE],char enemyMap[][MAXSIZE],int size,Ruler *wealth
                     yourMap[x][y]=yoursign;
                     enemyMap[x][y]=yoursign;
                     int check=checkWar(yourMap,x,y,yoursign);
-                    if(check==-1) { //جنگ تمام عیار
+                    if(check==-1){ //جنگ تمام عیار
                         if (wealth->soldiers > enemyWealth->soldiers)
                             return -1;
-                        else destroyRoad();
+                        else {
+                            destroyRoad();
+                            wealth->food=0;
+                            wealth->gold=0;
+                        }
                     }
-                    else if(check==0) //جنگ ساده
+                    else if(check==0) { //جنگ ساده
                         simpleWar();
+                    }
                     CheckVillage(yourMap,x,y,&(wealth->goldrate),&(wealth->foodrate),village,vRate);
                 }
                 else {
