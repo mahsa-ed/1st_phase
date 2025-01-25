@@ -18,7 +18,6 @@ int main(void) {
 
     printf("please enter the map size ");
     scanf("%d", &size);
-    //int values[size][size];
     for (i = 0; i < size; i++) {
         for (j = 0; j < size; j++) {
             Map[i][j] = '1';
