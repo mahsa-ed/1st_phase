@@ -9,8 +9,9 @@
 //#include "my_struct.h"
 #include "printColorMap.h"
 #include "file.h"
+#include "war.h"
 
-int Menu(char yourMap[][MAXSIZE],char enemyMap[][MAXSIZE],int size,Ruler *wealth,Rates vRate[],Coordinates village[],char yoursign) {
+int Menu(char yourMap[][MAXSIZE],char enemyMap[][MAXSIZE],int size,Ruler *wealth, Ruler *enemyWealth, Rates vRate[],Coordinates village[],char yoursign) {
     printf("SEE YOUR WEALTH!\n");
     printf("Gold: %d\n",wealth->gold);
     printf("Food: %d\n",wealth->food);
@@ -78,7 +79,7 @@ int Menu(char yourMap[][MAXSIZE],char enemyMap[][MAXSIZE],int size,Ruler *wealth
             printf("Enter the coordinate of new road. x:  y:\n");
             scanf("%d %d",&x,&y);
             x--, y--;
-            if (!CheckRoad(yourMap,x,y)) {
+            if (!CheckRoad(yourMap,x,y,yoursign)) {
                 printf("UNABLE TO BUILD A ROAD!TRY AGAIN\n");
                 return 0;
             }
@@ -86,6 +87,14 @@ int Menu(char yourMap[][MAXSIZE],char enemyMap[][MAXSIZE],int size,Ruler *wealth
                 if(wealth->workers>=(yourMap[x][y]-'0')) {
                     yourMap[x][y]=yoursign;
                     enemyMap[x][y]=yoursign;
+                    int check=checkWar(yourMap,x,y,yoursign);
+                    if(check==-1) { //جنگ تمام عیار
+                        if (wealth->soldiers > enemyWealth->soldiers)
+                            return -1;
+                        else destroyRoad();
+                    }
+                    else if(check==0) //جنگ ساده
+                        simpleWar();
                     CheckVillage(yourMap,x,y,&(wealth->goldrate),&(wealth->foodrate),village,vRate);
                 }
                 else {
